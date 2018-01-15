@@ -7,6 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import bot
 import datetime
 from calendarrr import maincal
+MYDIR = os.path.dirname(__file__)
 
 print("hi")
 Client = discord.Client()
@@ -38,7 +39,7 @@ async def on_message(message):
             kay = f.read()
             kay = kay.split("\n")
             f.close()
-            os.remove('temp.txt')            
+            os.remove('temp.txt')
             print(kay)
             event = str(kay[0])
             await client.send_message(message.channel,"<@{}> next event {}".format(UserID, event))
@@ -50,7 +51,7 @@ async def on_message(message):
     if message.content == 'uganda':
         bigint = random.randint(1,16)
         bigint = str(bigint)
-        bigname = "imgsugan\meme" + bigint + ".jpg"
+        bigname = MYDIR + "\\imgsugan\meme" + bigint + ".jpg"
         try:
             await client.send_file(message.channel, bigname)
         except:
