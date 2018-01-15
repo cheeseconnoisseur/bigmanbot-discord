@@ -7,7 +7,8 @@ from discord.ext import commands
 from discord.ext.commands import bot
 import datetime
 from calendarrr import maincal
-MYDIR = os.path.dirname(__file__)
+import urllib.request
+import urllib
 
 print("hi")
 Client = discord.Client()
@@ -51,12 +52,18 @@ async def on_message(message):
     if message.content == 'uganda':
         bigint = random.randint(1,16)
         bigint = str(bigint)
-        bigname = MYDIR + "\\imgsugan\meme" + bigint + ".jpg"
         try:
-            await client.send_file(message.channel, bigname)
+            bigstring = 'https://raw.githubusercontent.com/cheeseconnoisseur/bigmanbot-discord/master/imgsugan/meme' + bigint + '.jpg'
+            urllib.request.urlretrieve(bigstring, "meme1.jpg")
         except:
-            bigname = bigname.replace(".jpg", ".png")
-            await client.send_file(message.channel, bigname)
+            bigstring = 'https://raw.githubusercontent.com/cheeseconnoisseur/bigmanbot-discord/master/imgsugan/meme' + bigint + '.png'
+            urllib.request.urlretrieve(bigstring, "meme1.png")
+        try:
+            await client.send_file(message.channel, "meme1.jpg")
+            os.remove('meme1.jpg')
+        except:
+            await client.send_file(message.channel, "meme1.png")
+            os.remove('meme1.png')
 
     if message.content.startswith('!saygay'):
         args = message.content.split(" ")
