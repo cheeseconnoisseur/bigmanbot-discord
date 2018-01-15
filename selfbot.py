@@ -37,6 +37,8 @@ async def on_message(message):
         with open('temp.txt','r') as f:
             kay = f.read()
             kay = kay.split("\n")
+            f.close()
+            os.remove('temp.txt')            
             print(kay)
             event = str(kay[0])
             await client.send_message(message.channel,"<@{}> next event {}".format(UserID, event))
@@ -69,6 +71,8 @@ async def on_message(message):
             with open('temp.txt','r') as f:
                 kay = f.read()
                 kay = kay.split("\n")
+                f.close()
+                os.remove('temp.txt')
                 print(kay)
             for event in reversed(kay[:-1]):
                 print(kay)
@@ -79,4 +83,4 @@ async def on_message(message):
 
 
 
-client.run('NDAyMDYyMDU1MzAzMTUxNjI3.DTzRSg.ukpgZC-jYDamtCmpdUj5BWY3i-A')
+client.run('NDAyMDYyMDU1MzAzMTUxNjI3.DT0DCQ.a6qW0wFIVqRDRluoXALaZb8oYL4')
