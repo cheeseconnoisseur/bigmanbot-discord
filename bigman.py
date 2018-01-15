@@ -6,7 +6,6 @@ import os
 from discord.ext import commands
 from discord.ext.commands import bot
 import datetime
-from calendarrr import maincal
 import urllib.request
 import urllib
 
