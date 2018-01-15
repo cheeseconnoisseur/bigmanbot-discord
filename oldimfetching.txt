@@ -1,0 +1,9 @@
+    if message.content == 'uganda':
+        bigint = random.randint(1,16)
+        bigint = str(bigint)
+        bigname = MYDIR + "\\imgsugan\meme" + bigint + ".jpg"
+        try:
+            await client.send_file(message.channel, bigname)
+        except:
+            bigname = bigname.replace(".jpg", ".png")
+            await client.send_file(message.channel, bigname)
