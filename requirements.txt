@@ -2,6 +2,4 @@ discord.py
 google-api-python-client
 pytube
 asyncio
-random
-pickle
-os
+
