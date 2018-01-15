@@ -11,3 +11,6 @@ crasync
 cr-py
 urban-async
 safygiphy
+discord.py
+google-api-python-client
+pytube
