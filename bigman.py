@@ -8,7 +8,11 @@ from discord.ext import commands
 from discord.ext.commands import bot
 import datetime
 import urllib.request
+import requests
 import urllib
+import yaml
+import json
+
 
 print("hi")
 Client = discord.Client()
@@ -25,7 +29,7 @@ async def on_message(message):
     if message.content.startswith('!help'):
         UserID = message.author.id
         print(UserID)
-        await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda".format(UserID))
+        await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)".format(UserID))
     if message.author.id == '185465039040282624':
         bigint = random.randint(1,3)
         if bigint == 2:
@@ -34,6 +38,20 @@ async def on_message(message):
     if message.content.startswith('!gay'):
         UserID = message.author.id
         await client.send_message(message.channel,"<@{}>".format(UserID))
+    if message.content.startswith('!insult'):
+        args = message.content.split(" ")
+        args = args[1]
+        urllib.request.urlretrieve("https://raw.githubusercontent.com/cheeseconnoisseur/bigmanbot-discord/master/insults.yml", "insults.yml")
+        #urllib.request.urlretrieve("https://raw.githubusercontent.com/cheeseconnoisseur/bigmanbot-discord/master/insults.yml")
+        yamfile = yaml.load(open('insults.yml'))
+        pref = 'Thou'
+        col1 = random.choice(yamfile['column1'])
+        col2 = random.choice(yamfile['column2'])
+        col3 = random.choice(yamfile['column3'])
+        insultmessage = pref + ' ' + col1 + ' ' + col2 + ' ' + col3 + '.'
+        await client.send_message(message.channel,args + insultmessage)
+        os.remove('insults.yml')
+        
     if message.content.startswith('!farth'):
         UserID = message.author.id
         await client.send_message(message.channel,"<@{}> shut up you rabient homosexual".format(UserID))
