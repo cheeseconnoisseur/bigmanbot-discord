@@ -3,7 +3,7 @@ import asyncio
 import random
 import pickle
 import os
-from check import checker
+#from check import checker
 from discord.ext import commands
 from discord.ext.commands import bot
 import datetime
