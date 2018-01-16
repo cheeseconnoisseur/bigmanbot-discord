@@ -27,7 +27,9 @@ async def on_message(message):
         print(UserID)
         await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda".format(UserID))
     if message.author.id == '185465039040282624':
-        await client.send_message(message.channel,"fallacy")
+        bigint = random.randint(1,3)
+        if bigint == 2:
+            await client.send_message(message.channel,"fallacy")
 
     if message.content.startswith('!gay'):
         UserID = message.author.id
