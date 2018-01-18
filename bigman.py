@@ -35,10 +35,10 @@ async def on_message(message):
         if bigint > 1:
             await client.send_message(message.channel,"fallacy")
 
-    if message.content.startswith('!gay'):
+    if message.content.upper().startswith('!GAY'):
         UserID = message.author.id
         await client.send_message(message.channel,"<@{}>".format(UserID))
-    if message.content.startswith('!insult'):
+    if message.content.upper().startswith('!INSULT'):
         args = message.content.split(" ")
         args = args[1]
         urllib.request.urlretrieve("https://raw.githubusercontent.com/cheeseconnoisseur/bigmanbot-discord/master/insults.yml", "insults.yml")
@@ -52,12 +52,14 @@ async def on_message(message):
         await client.send_message(message.channel,args + insultmessage)
         os.remove('insults.yml')
         
-    if message.content.startswith('!farth'):
+    if message.content.upper().startswith('!FARTH'):
         UserID = message.author.id
         await client.send_message(message.channel,"<@{}> shut up you rabient homosexual".format(UserID))
-    if message.content == 'gay':
+    if message.content.upper() == 'GAY':
         await client.send_message(message.channel, ":joy:")
-    if message.content == 'uganda':
+    if 'UGANDA' in message.content.upper():
+        await client.send_message(message.channel, "you speak of the holy lands")
+    if message.content.upper() == 'UGANDA':
         bigint = random.randint(1,16)
         bigint = str(bigint)
         try:
@@ -73,7 +75,7 @@ async def on_message(message):
             await client.send_file(message.channel, "meme1.png")
             os.remove('meme1.png')
 
-    if message.content.startswith('!saygay'):
+    if message.content.upper().startswith('!SAY'):
         args = message.content.split(" ")
         await client.send_message(message.channel, "{}".format(" ".join(args[1:])))
 
