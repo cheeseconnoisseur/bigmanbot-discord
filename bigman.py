@@ -57,7 +57,7 @@ async def on_message(message):
         await client.send_message(message.channel,"<@{}> shut up you rabient homosexual".format(UserID))
     if message.content.upper() == 'GAY':
         await client.send_message(message.channel, ":joy:")
-    if 'UGANDA' in message.content.upper():
+    if 'UGANDA' in message.content.upper() and not message.content.upper().startswith('UGANDA'):
         await client.send_message(message.channel, "you speak of the holy lands")
     if message.content.upper() == 'UGANDA':
         bigint = random.randint(1,16)
