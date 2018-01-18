@@ -29,7 +29,7 @@ async def on_message(message):
     if message.content.upper().startswith('!HELP'):
         UserID = message.author.id
         print(UserID)
-        await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)".format(UserID))
+        await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)\n if you mention uganda at any time\n!say".format(UserID))
     if message.author.id == '185465039040282624':
         bigint = random.uniform(0.0,math.pi)
         if bigint > 1:
