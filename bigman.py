@@ -26,7 +26,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('!help'):
+    if message.content.upper().startswith('!HELP'):
         UserID = message.author.id
         print(UserID)
         await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)".format(UserID))
