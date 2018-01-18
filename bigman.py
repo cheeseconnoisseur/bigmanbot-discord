@@ -12,7 +12,7 @@ import requests
 import urllib
 import yaml
 import json
-
+import math
 
 print("hi")
 Client = discord.Client()
@@ -31,8 +31,8 @@ async def on_message(message):
         print(UserID)
         await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)".format(UserID))
     if message.author.id == '185465039040282624':
-        bigint = random.randint(1,3)
-        if bigint == 2:
+        bigint = random.uniform(0.0,math.pi)
+        if bigint > 1:
             await client.send_message(message.channel,"fallacy")
 
     if message.content.startswith('!gay'):
