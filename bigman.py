@@ -110,6 +110,8 @@ async def on_message(message):
     if message.content.upper().startswith('!FARTH'):
         UserID = message.author.id
         await client.send_message(message.channel,"<@{}> shut up you rabient homosexual".format(UserID))
+    if message.content.upper().startswith('!LOGAN'):
+        await client.send_file(message.channel, "lp.png"
     if message.content.upper() == 'GAY':
         await client.send_message(message.channel, ":joy:")
     if 'UGANDA' in message.content.upper() and not message.content.upper().startswith('UGANDA'):
