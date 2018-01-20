@@ -32,7 +32,7 @@ async def on_message(message):
         await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)\n if you mention uganda at any time\n!say".format(UserID))
     if message.author.id == '185465039040282624':
         bigint = random.uniform(0.0,math.pi)
-        if bigint > 1:
+        if bigint < 1:
             await client.send_message(message.channel,"fallacy")
 
     if message.content.upper().startswith('!GAY'):
@@ -51,7 +51,7 @@ async def on_message(message):
         insultmessage = pref + ' ' + col1 + ' ' + col2 + ' ' + col3 + '.'
         await client.send_message(message.channel,args + insultmessage)
         os.remove('insults.yml')
-        
+
     if message.content.upper().startswith('!FARTH'):
         UserID = message.author.id
         await client.send_message(message.channel,"<@{}> shut up you rabient homosexual".format(UserID))
