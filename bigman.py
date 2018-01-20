@@ -13,6 +13,7 @@ import urllib
 import yaml
 import json
 import math
+from pytube import YouTube
 
 print("hi")
 Client = discord.Client()
@@ -37,7 +38,61 @@ async def on_message(message):
 
     if message.content.upper().startswith('!GAY'):
         UserID = message.author.id
-        await client.send_message(message.channel,"<@{}>".format(UserID))
+
+
+
+
+    if message.content.upper().startswith('!TUBE'):
+        error = 0
+        UserID = message.author.id
+        args = message.content.split(" ")
+        args = args[1]
+        yt = YouTube(args)
+        await client.send_message(message.channel,"<@{}> warning this is in beta".format(UserID))
+        title = yt.title
+        stream = yt.streams.first()
+        await client.send_message(message.channel,"<@{}> downloading".format(UserID))
+        stream.download()
+        oldtitle = title
+        await client.send_message(message.channel,"<@{}> uploading".format(UserID))
+        try:
+            title = title.replace(".","")
+            title = title + ".mp4"
+            title = title.replace(":","")
+            title = title.replace(",","")
+            title = title.replace("?","")
+            await client.send_file(message.channel, title)
+        except:
+            error = error + 1
+            print("lolno")
+        try:
+            oldtitle = oldtitle + ".webm"
+            oldtitle = oldtitle.replace(":","")
+            oldtitle = oldtitle.replace("?","")
+            await client.send_file(message.channel, oldtitle)
+
+        except:
+            error = error + 1
+            print("lolno")
+
+        if error == 2:
+            await client.send_message(message.channel,"<@{}> FATAL error has occured video probably too large , max file size: 8mb, discords limit not mine".format(UserID))
+
+        try:
+            os.remove(title)
+        except:
+            print("no1")
+        try:
+            os.remove(oldtitle)
+        except:
+            print("no2")
+
+        print("lol")
+
+
+
+
+
     if message.content.upper().startswith('!INSULT'):
         args = message.content.split(" ")
         args = args[1]
