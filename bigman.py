@@ -135,7 +135,7 @@ async def on_message(message):
             await client.send_file(message.channel, "meme1.png")
             os.remove('meme1.png')
 
-    if message.content.upper().startswith('!SAY'):
+    if message.content.upper().startswith('!SAY') and not message.content.upper().startswith('!SAY !SAY'):
         args = message.content.split(" ")
         await client.send_message(message.channel, "{}".format(" ".join(args[1:])))
 
