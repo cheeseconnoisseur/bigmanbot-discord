@@ -46,16 +46,28 @@ async def on_message(message):
         Client.close()
 
     if message.content.upper().startswith('!YEMS'):
-        img = Image.open('flower.jpg', 'r')
+        if len(message.attachments) == 1:
+            await client.send_message(message.channel,"memefying in process")
+            url = message.attachments[0]
+            url = url['proxy_url']
+            bigstring = url
+            opener=urllib.request.build_opener()
+            opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
+            urllib.request.install_opener(opener)
+            urllib.request.urlretrieve(bigstring, "meme1.png")
+
+
+
+        img = Image.open('meme1.png', 'r')
         img_w, img_h = img.size
-        img2 = Image.open('flower2.jpg', 'r')
+        img2 = Image.open('yems.png', 'r')
         img2_w, img2_h = img2.size
         offsetw = int((img_h - img2_h) / 2)
         offseth = int((img_h - img2_h) / 2)
 
-        img.paste(img2, (offsetw, offseth))
-        img.save('out.png')
-        await client.send_file(message.channel, "out.png")
+        img.paste(img2, (offsetw, offseth), img2)
+        img.save('meme1.png')
+        await client.send_file(message.channel, "meme1.png")
 
     #if message.author.id == '310469854564057088':
 
