@@ -68,6 +68,7 @@ async def on_message(message):
         img.paste(img2, (offsetw, offseth), img2)
         img.save('meme1.png')
         await client.send_file(message.channel, "meme1.png")
+        os.remove("meme1.png")
 
     #if message.author.id == '310469854564057088':
 
