@@ -13,7 +13,9 @@ import urllib
 import yaml
 import json
 import math
+import time
 from pytube import YouTube
+from PIL import Image
 
 print("hi")
 Client = discord.Client()
@@ -22,8 +24,9 @@ client = commands.Bot(command_prefix = "?")
 
 @client.event
 async def on_ready():
-    await client.change_presence(game=discord.Game(name='your mum'))
     print("bot is ready")
+    await client.change_presence(game=discord.Game(name='your mum'))
+
 
 @client.event
 async def on_message(message):
@@ -38,6 +41,37 @@ async def on_message(message):
 
     if message.content.upper().startswith('!GAY'):
         UserID = message.author.id
+
+    if message.content.upper().startswith('!FOUTTAHERE'):
+        Client.close()
+
+    if message.content.upper().startswith('!YEMS'):
+        img = Image.open('flower.jpg', 'r')
+        img_w, img_h = img.size
+        img2 = Image.open('flower2.jpg', 'r')
+        img2_w, img2_h = img2.size
+        offsetw = int((img_h - img2_h) / 2)
+        offseth = int((img_h - img2_h) / 2)
+
+        img.paste(img2, (offsetw, offseth))
+        img.save('out.png')
+        await client.send_file(message.channel, "out.png")
+
+    #if message.author.id == '310469854564057088':
+
+
+
+
+
+
+    #    with open("lyrics.txt", "r") as f:
+    ##    UserID = message.author.id
+    #    for i in range(200):
+        #    time.sleep(3)
+            #await client.change_presence(game=discord.Game(name= 'lol{}'.format(i)))
+
+
+
 
 
 
