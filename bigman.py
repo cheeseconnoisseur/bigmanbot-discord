@@ -55,7 +55,10 @@ async def on_message(message):
         attid = attid
 
     if message.content.upper().startswith('!YEMS'):
-        global attid
+        try:
+            global attid
+        except:
+            joe = 1
         msg = await client.get_message(message.channel, attid)
         await client.send_message(message.channel,"memefying in process")
         url = msg.attachments[0]
