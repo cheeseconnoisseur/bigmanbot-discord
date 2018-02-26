@@ -21,6 +21,8 @@ print("hi")
 Client = discord.Client()
 client = commands.Bot(command_prefix = "?")
 
+global attid
+
 
 @client.event
 async def on_ready():
@@ -45,18 +47,24 @@ async def on_message(message):
     if message.content.upper().startswith('!FOUTTAHERE'):
         Client.close()
 
+
+    try:
+        if message.attachments[0]:
+            attid = message.id
+    except:
+        attid = attid
+
     if message.content.upper().startswith('!YEMS'):
-        if len(message.attachments) == 1:
-            await client.send_message(message.channel,"memefying in process")
-            url = message.attachments[0]
-            url = url['proxy_url']
-            bigstring = url
-            opener=urllib.request.build_opener()
-            opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
-            urllib.request.install_opener(opener)
-            urllib.request.urlretrieve(bigstring, "meme1.png")
-
-
+        global attid
+        msg = await client.get_message(message.channel, attid)
+        await client.send_message(message.channel,"memefying in process")
+        url = msg.attachments[0]
+        url = url['proxy_url']
+        bigstring = url
+        opener=urllib.request.build_opener()
+        opener.addheaders=[('User-Agent','Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1941.0 Safari/537.36')]
+        urllib.request.install_opener(opener)
+        urllib.request.urlretrieve(bigstring, "meme1.png")
 
         img = Image.open('meme1.png', 'r')
         img_w, img_h = img.size
@@ -69,6 +77,7 @@ async def on_message(message):
         img.save('meme1.png')
         await client.send_file(message.channel, "meme1.png")
         os.remove("meme1.png")
+
 
     #if message.author.id == '310469854564057088':
 
