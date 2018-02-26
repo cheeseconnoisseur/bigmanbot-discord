@@ -52,7 +52,7 @@ async def on_message(message):
         if message.attachments[0]:
             attid = message.id
     except:
-        attid = attid
+        joe = 1
 
     if message.content.upper().startswith('!YEMS'):
         try:
