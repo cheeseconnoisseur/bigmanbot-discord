@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import random
+from random import randint
 import pickle
 import os
 #from check import checker
@@ -82,8 +83,14 @@ async def on_message(message):
         img_w, img_h = img.size
         img2 = Image.open('yems.png', 'r')
         img2_w, img2_h = img2.size
-        offsetw = int((img_h - img2_h) / 2)
-        offseth = int((img_h - img2_h) / 2)
+        ww = randint(1,11)
+        #ww = ww / 10
+        hh = randint(1,11)
+        #hh = hh / 10
+        hhh = hh + hh
+        www = ww + ww
+        offsetw = int((img_h - img2_h) / www)
+        offseth = int((img_h - img2_h) / hhh)
 
         img.paste(img2, (offsetw, offseth), img2)
         img.save('meme1.png')
@@ -91,7 +98,32 @@ async def on_message(message):
         os.remove("meme1.png")
 
 
-    #if message.author.id == '310469854564057088':
+    if message.author.id == '135410033524604928':
+        randyems = randint(0,3)
+        if randyems == 2 or 3:
+            yemsint = randint(0,10)
+            if yemsint == 0:
+                await client.send_message(message.channel,"shut up youre literally five just why just litearrly stfu")
+            if yemsint == 1:
+                await client.send_message(message.channel,"turn around yup turn around")
+            if yemsint == 2:
+                await client.send_message(message.channel,"bro i can barely even see you be quiet")
+            if yemsint == 3:
+                await client.send_message(message.channel,"acctually the straw that broke alfonse man just go play overwatch")
+            if yemsint == 4:
+                await client.send_message(message.channel,"YEeeeEEEEeeeems")
+            if yemsint == 5:
+                await client.send_message(message.channel,"bro is this kid still talking ^^^")
+            if yemsint == 6:
+                await client.send_message(message.channel,"okay yems lets just sit down mkay? just a quick lik chat")
+            if yemsint == 7:
+                await client.send_message(message.channel,"and you think because youre in the gang de gucci that you cool or somin just stfu")
+            if yemsint == 8:
+                await client.send_message(message.channel,"*facepalm*")
+            if yemsint == 9:
+                await client.send_message(message.channel,"https://www.wikihow.com/Leave-a-Discord-Server-on-a-PC-or-Mac")
+            if yemsint == 10:
+                await client.send_message(message.channel,"im acc stealing all your street cred")
 
 
 
