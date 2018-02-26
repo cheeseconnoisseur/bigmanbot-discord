@@ -51,15 +51,24 @@ async def on_message(message):
     try:
         if message.attachments[0]:
             attid = message.id
+            with open("oetg.txt", "w") as f:
+                f.write(message.id)
     except:
         joe = 1
 
     if message.content.upper().startswith('!YEMS'):
+        #try:
+        #    global attid
+        #except:
+            #joe = 1
         try:
-            global attid
+            with open("oetg.txt", "r") as f:
+                mmmh = f.read()
         except:
             joe = 1
-        msg = await client.get_message(message.channel, attid)
+
+
+        msg = await client.get_message(message.channel, mmmh)
         await client.send_message(message.channel,"memefying in process")
         url = msg.attachments[0]
         url = url['proxy_url']
