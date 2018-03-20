@@ -241,4 +241,4 @@ async def on_message(message):
 
 
 
-client.run('NDAyMDYyMDU1MzAzMTUxNjI3.DUY1OA.qgF-TBc9-f6tR__z3cIjFqTjvak', reconnect=True)
+client.run('NDAyMDYyMDU1MzAzMTUxNjI3.DZLMuQ.92tQjWph1azQrER4qDLeFcZBW4U', reconnect=True)
