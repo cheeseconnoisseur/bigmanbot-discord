@@ -100,7 +100,7 @@ async def on_message(message):
 
     if message.author.id == '135410033524604928':
         randyems = randint(0,3)
-        if randyems == 2 or 3:
+        if randyems in (2, 3):
             yemsint = randint(0,10)
             if yemsint == 0:
                 await client.send_message(message.channel,"shut up youre literally five just why just litearrly stfu")
@@ -241,4 +241,4 @@ async def on_message(message):
 
 
 
-client.run('mmmm', reconnect=True)
+client.run('NDAyMDYyMDU1MzAzMTUxNjI3.DZLgPg._Vp8CQ9Xio0h5PvXWJQg0QM1ies', reconnect=True)
