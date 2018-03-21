@@ -46,6 +46,7 @@ async def on_message(message):
         UserID = message.author.id
 
     if message.content.upper().startswith('!FOUTTAHERE'):
+        await client.send_message(message.channel,'bye bitches')
         Client.close()
 
 
@@ -217,6 +218,7 @@ async def on_message(message):
         os.remove('logan.png')
     if message.content.upper() == 'GAY':
         await client.send_message(message.channel, ":joy:")
+        await client.send_message(message.author, "I now you are but what am I:joy:")
     if 'UGANDA' in message.content.upper() and not message.content.upper().startswith('UGANDA'):
         await client.send_message(message.channel, "you speak of the holy lands")
     if message.content.upper() == 'UGANDA':
@@ -235,9 +237,14 @@ async def on_message(message):
             await client.send_file(message.channel, "meme1.png")
             os.remove('meme1.png')
 
-    if message.content.upper().startswith('!SAY ') and not message.content.upper().startswith('!SAY !SAY'):
+    if message.content.upper().startswith('!SAY ') and message.author.id != '402062055303151627':
         args = message.content.split(" ")
         await client.send_message(message.channel, "{}".format(" ".join(args[1:])))
+        
+    if message.content.upper().startswith('!DSAY ') and message.author.id != '402062055303151627':
+        args = message.content.split(" ")
+        await client.send_message(message.channel, "{}".format(" ".join(args[1:])))
+        await client.delete_message(message)
 
 
 

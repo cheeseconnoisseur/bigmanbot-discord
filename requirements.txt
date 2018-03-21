@@ -4,3 +4,4 @@ pytube
 asyncio
 pyyaml
 pillow
+requests
