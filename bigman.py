@@ -17,6 +17,9 @@ import math
 import time
 from pytube import YouTube
 from PIL import Image
+import json
+import sys
+
 
 print("hi")
 Client = discord.Client()
@@ -24,6 +27,24 @@ client = commands.Bot(command_prefix = "?")
 
 global attid
 
+def extractyboi(data, typee):
+    if typee == "solo":
+        typeee = "p2"
+    elif typee == "duo":
+        typeee = "p10"
+    elif typee == "squads":
+        typeee = "p9"
+
+    smallerdata = data["stats"][typeee]
+
+    rating = smallerdata["trnRating"]["value"]
+    score = smallerdata["score"]["value"]
+    wins = smallerdata["top1"]["value"]
+    kdr = smallerdata["kd"]["value"]
+    kills = smallerdata["kills"]["value"]
+    matches = smallerdata["matches"]["value"]
+
+    return(rating,score,wins,kdr,kills,matches)
 
 @client.event
 async def on_ready():
@@ -36,7 +57,7 @@ async def on_message(message):
     if message.content.upper().startswith('!HELP'):
         UserID = message.author.id
         print(UserID)
-        await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)\n if you mention uganda at any time\n!say\n!tube (link)\n!logan".format(UserID))
+        await client.send_message(message.channel,"<@{}> commands are:\n!farth\n!gay\n!help\nuganda\n!insult (name)\n if you mention uganda at any time\n!say\n!tube (link)\n!logan\n Fortnite Stuff :\n!f (platform) (name) \n!c (unlimited names , space between each name)".format(UserID))
     if message.author.id == '185465039040282624':
         bigint = random.uniform(0.0,math.pi)
         if bigint < 1:
@@ -191,7 +212,65 @@ async def on_message(message):
         print("lol")
 
 
+    if message.content.upper().startswith('!C'):
+        UserID = message.author.id
+        args = message.content.split(" ")
 
+        lentil = len(args)
+        lentil = lentil - 1
+        for i in range(lentil):
+            name = args[i + 1]
+            print(name)
+            header = {"TRN-Api-Key": "frstats api token"}
+            url = "https://api.fortnitetracker.com/v1/profile/pc/" + name
+            r = requests.get(url, headers= header)
+            data = json.loads(r.text)
+            rating,score,wins,kdr,kills,matches = extractyboi(data, "solo")
+            drating,dscore,dwins,dkdr,dkills,dmatches = extractyboi(data, "duo")
+            srating,sscore,swins,skdr,skills, smatches = extractyboi(data, "squads")
+            overallkills = int(kills) + int(dkills) + int(skills)
+            overallwins = int(wins) + int(dwins) + int(swins)
+            overallmatches = int(matches) + int(dmatches) + int(smatches)
+            overallkd = (float(kdr) + float(dkdr) + float(skdr)) / 3
+            overallkd = float("{0:.3f}".format(overallkd))
+            await client.send_message(message.channel,"OVERALL for {}:\n overall kills: {} \n overall wins: {} \n overall kdr: {} \n overall matches: {}".format(name, overallkills, overallwins, overallkd, overallmatches))
+
+
+
+
+    if message.content.upper().startswith('!F'):
+        UserID = message.author.id
+        args = message.content.split(" ")
+        maybename = args[1]
+        if maybename == "pc":
+            typee = "pc"
+            name = args[2]
+        elif maybename == "ps4":
+            typee = "psn"
+            name = args[2]
+        elif maybename == "xbox":
+            typee = "xbl"
+            name = args[2]
+        else:
+            typee = "pc"
+            name = maybename
+
+        header = {"TRN-Api-Key": "fr stats api token"}
+        url = "https://api.fortnitetracker.com/v1/profile/" + typee + "/" + name
+        r = requests.get(url, headers= header)
+        data = json.loads(r.text)
+        rating,score,wins,kdr,kills,matches = extractyboi(data, "solo")
+        drating,dscore,dwins,dkdr,dkills,dmatches = extractyboi(data, "duo")
+        srating,sscore,swins,skdr,skills, smatches = extractyboi(data, "squads")
+        await client.send_message(message.channel,"<@{}>\n {}'s stats\n SOLO:\n solo kills: {} \n solo wins: {} \n solo kdr: {}\n solo matches: {} ".format(UserID, name, kills, wins, kdr , matches))
+        await client.send_message(message.channel,"DUOS:\n duo kills: {} \n duo wins: {} \n duo kdr: {}\n duo matches: {} ".format(dkills,dwins,dkdr, dmatches))
+        await client.send_message(message.channel,"SQUADS:\n squads kills: {} \n squads wins: {} \n squads kdr: {}\n squad matches: {}  ".format(skills, swins, skdr, smatches))
+        overallkills = int(kills) + int(dkills) + int(skills)
+        overallwins = int(wins) + int(dwins) + int(swins)
+        overallmatches = int(matches) + int(dmatches) + int(smatches)
+        overallkd = (float(kdr) + float(dkdr) + float(skdr)) / 3
+        overallkd = float("{0:.3f}".format(overallkd))
+        await client.send_message(message.channel,"OVERALL:\n overall kills: {} \n overall wins: {} \n overall kdr: {} \n overall matches: {}".format(overallkills, overallwins, overallkd, overallmatches))
 
 
     if message.content.upper().startswith('!INSULT'):
@@ -240,7 +319,7 @@ async def on_message(message):
     if message.content.upper().startswith('!SAY ') and message.author.id != '402062055303151627':
         args = message.content.split(" ")
         await client.send_message(message.channel, "{}".format(" ".join(args[1:])))
-        
+
     if message.content.upper().startswith('!DSAY ') and message.author.id != '402062055303151627':
         args = message.content.split(" ")
         await client.send_message(message.channel, "{}".format(" ".join(args[1:])))
@@ -248,4 +327,4 @@ async def on_message(message):
 
 
 
-client.run('mmmmmm', reconnect=True)
+client.run('token', reconnect=True)
