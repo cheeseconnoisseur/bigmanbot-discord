@@ -221,7 +221,7 @@ async def on_message(message):
         for i in range(lentil):
             name = args[i + 1]
             print(name)
-            header = {"TRN-Api-Key": "frstats api token"}
+            header = {"TRN-Api-Key": "fortntietracker api key"}
             url = "https://api.fortnitetracker.com/v1/profile/pc/" + name
             r = requests.get(url, headers= header)
             data = json.loads(r.text)
@@ -231,9 +231,10 @@ async def on_message(message):
             overallkills = int(kills) + int(dkills) + int(skills)
             overallwins = int(wins) + int(dwins) + int(swins)
             overallmatches = int(matches) + int(dmatches) + int(smatches)
-            overallkd = (float(kdr) + float(dkdr) + float(skdr)) / 3
+            #overallkd = (float(kdr) + float(dkdr) + float(skdr)) / 3
+            overallkd = overallkills/(overallmatches - overallwins)
             overallkd = float("{0:.3f}".format(overallkd))
-            await client.send_message(message.channel,"OVERALL for {}:\n overall kills: {} \n overall wins: {} \n overall kdr: {} \n overall matches: {}".format(name, overallkills, overallwins, overallkd, overallmatches))
+            await client.send_message(message.channel,"__**OVERALL for {}:**__\n overall kills: {} \n overall wins: {} \n overall kdr: {} \n overall matches: {}".format(name, overallkills, overallwins, overallkd, overallmatches))
 
 
 
@@ -255,22 +256,23 @@ async def on_message(message):
             typee = "pc"
             name = maybename
 
-        header = {"TRN-Api-Key": "fr stats api token"}
+        header = {"TRN-Api-Key": "fortntietracker api key"}
         url = "https://api.fortnitetracker.com/v1/profile/" + typee + "/" + name
         r = requests.get(url, headers= header)
         data = json.loads(r.text)
         rating,score,wins,kdr,kills,matches = extractyboi(data, "solo")
         drating,dscore,dwins,dkdr,dkills,dmatches = extractyboi(data, "duo")
         srating,sscore,swins,skdr,skills, smatches = extractyboi(data, "squads")
-        await client.send_message(message.channel,"<@{}>\n {}'s stats\n SOLO:\n solo kills: {} \n solo wins: {} \n solo kdr: {}\n solo matches: {} ".format(UserID, name, kills, wins, kdr , matches))
-        await client.send_message(message.channel,"DUOS:\n duo kills: {} \n duo wins: {} \n duo kdr: {}\n duo matches: {} ".format(dkills,dwins,dkdr, dmatches))
-        await client.send_message(message.channel,"SQUADS:\n squads kills: {} \n squads wins: {} \n squads kdr: {}\n squad matches: {}  ".format(skills, swins, skdr, smatches))
+        await client.send_message(message.channel,"<@{}>\n__**{}'s stats**__\n **SOLO:**\n solo kills: {} \n solo wins: {} \n solo kdr: {}\n solo matches: {} ".format(UserID, name, kills, wins, kdr , matches))
+        await client.send_message(message.channel,"**DUOS:**\n duo kills: {} \n duo wins: {} \n duo kdr: {}\n duo matches: {} ".format(dkills,dwins,dkdr, dmatches))
+        await client.send_message(message.channel,"**SQUADS:**\n squads kills: {} \n squads wins: {} \n squads kdr: {}\n squad matches: {}  ".format(skills, swins, skdr, smatches))
         overallkills = int(kills) + int(dkills) + int(skills)
         overallwins = int(wins) + int(dwins) + int(swins)
         overallmatches = int(matches) + int(dmatches) + int(smatches)
-        overallkd = (float(kdr) + float(dkdr) + float(skdr)) / 3
+        #overallkd = (float(kdr) + float(dkdr) + float(skdr)) / 3
+        overallkd = overallkills/(overallmatches - overallwins)
         overallkd = float("{0:.3f}".format(overallkd))
-        await client.send_message(message.channel,"OVERALL:\n overall kills: {} \n overall wins: {} \n overall kdr: {} \n overall matches: {}".format(overallkills, overallwins, overallkd, overallmatches))
+        await client.send_message(message.channel,"***OVERALL***:\n overall kills: {} \n overall wins: {} \n overall kdr: {} \n overall matches: {}".format(overallkills, overallwins, overallkd, overallmatches))
 
 
     if message.content.upper().startswith('!INSULT'):
